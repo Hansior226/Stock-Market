@@ -4,7 +4,7 @@ Stock-Market-Simulator
 
 ## Description
 
-My first ever C++ project all made by myself. I ad it not because is super usefull or super extensive, I added it simply out of nostalgia.
+My first ever C++ project all made by myself. I add it not because is super usefull or super extensive, I added it simply out of nostalgia.
 
 ## Getting Started
 
