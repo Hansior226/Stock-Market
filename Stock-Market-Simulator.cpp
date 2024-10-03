@@ -1,4 +1,4 @@
-﻿﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <map>
 #include <cstdlib>
@@ -31,12 +31,12 @@ public:
     }
 
     void showMarket() {
-        cout << "---- Aktualne akcje na rynku ----" << endl;
+        cout << "---- Current Stocks on the Market ----" << endl;
         for (auto& pair : stocks) {
             cout << pair.first << " (" << pair.second.name << "): $" << pair.second.price
-                << " | Dostępne: " << pair.second.quantity << endl;
+                << " | Available: " << pair.second.quantity << endl;
         }
-        cout << "---------------------------------" << endl;
+        cout << "---------------------------------------" << endl;
     }
 
     void updatePrices() {
@@ -65,42 +65,42 @@ public:
     Investor(double initialBalance) : balance(initialBalance) {}
 
     void showBalance() {
-        cout << "Saldo: $" << balance << endl;
+        cout << "Balance: $" << balance << endl;
     }
 
     void showPortfolio() {
-        cout << "---- Twój portfel ----" << endl;
+        cout << "---- Your Portfolio ----" << endl;
         if (portfolio.empty()) {
-            cout << "Brak akcji." << endl;
+            cout << "No stocks." << endl;
         }
         else {
             for (auto& pair : portfolio) {
-                cout << pair.first << ": " << pair.second << " akcji" << endl;
+                cout << pair.first << ": " << pair.second << " shares" << endl;
             }
         }
-        cout << "----------------------" << endl;
+        cout << "-----------------------" << endl;
     }
 
     bool buyStock(Stock* stock, int quantity) {
         double cost = stock->price * quantity;
         if (stock->quantity < quantity) {
-            cout << "Nie ma wystarczającej ilości akcji na rynku." << endl;
+            cout << "Not enough shares available on the market." << endl;
             return false;
         }
         if (cost > balance) {
-            cout << "Niewystarczające środki." << endl;
+            cout << "Insufficient funds." << endl;
             return false;
         }
         balance -= cost;
         stock->quantity -= quantity;
         portfolio[stock->name] += quantity;
-        cout << "Zakupiłeś " << quantity << " akcji " << stock->name << "." << endl;
+        cout << "You bought " << quantity << " shares of " << stock->name << "." << endl;
         return true;
     }
 
     bool sellStock(Stock* stock, int quantity) {
         if (portfolio[stock->name] < quantity) {
-            cout << "Nie posiadasz wystarczającej liczby akcji." << endl;
+            cout << "You do not own enough shares." << endl;
             return false;
         }
         double revenue = stock->price * quantity;
@@ -110,7 +110,7 @@ public:
         if (portfolio[stock->name] == 0) {
             portfolio.erase(stock->name);
         }
-        cout << "Sprzedałeś " << quantity << " akcji " << stock->name << "." << endl;
+        cout << "You sold " << quantity << " shares of " << stock->name << "." << endl;
         return true;
     }
 };
@@ -123,9 +123,9 @@ int main() {
     int option;
 
     do {
-        cout << "\n--- Symulacja giełdy ---" << endl;
-        cout << "1. Pokaż rynek\n2. Kup akcje\n3. Sprzedaj akcje\n4. Pokaż portfel\n5. Pokaż saldo\n6. Aktualizuj ceny\n7. Wyjdź\n";
-        cout << "Wybierz opcję: ";
+        cout << "\n--- Stock Market Simulation ---" << endl;
+        cout << "1. Show Market\n2. Buy Stock\n3. Sell Stock\n4. Show Portfolio\n5. Show Balance\n6. Update Prices\n7. Exit\n";
+        cout << "Choose an option: ";
         cin >> option;
 
         switch (option) {
@@ -135,32 +135,32 @@ int main() {
         case 2: {
             string symbol;
             int quantity;
-            cout << "Podaj symbol akcji do kupienia: ";
+            cout << "Enter the stock symbol to buy: ";
             cin >> symbol;
             Stock* stock = market.getStock(symbol);
             if (stock) {
-                cout << "Podaj ilość akcji: ";
+                cout << "Enter the number of shares: ";
                 cin >> quantity;
                 investor.buyStock(stock, quantity);
             }
             else {
-                cout << "Nie znaleziono akcji." << endl;
+                cout << "Stock not found." << endl;
             }
             break;
         }
         case 3: {
             string symbol;
             int quantity;
-            cout << "Podaj symbol akcji do sprzedaży: ";
+            cout << "Enter the stock symbol to sell: ";
             cin >> symbol;
             Stock* stock = market.getStock(symbol);
             if (stock) {
-                cout << "Podaj ilość akcji: ";
+                cout << "Enter the number of shares: ";
                 cin >> quantity;
                 investor.sellStock(stock, quantity);
             }
             else {
-                cout << "Nie znaleziono akcji." << endl;
+                cout << "Stock not found." << endl;
             }
             break;
         }
@@ -172,13 +172,13 @@ int main() {
             break;
         case 6:
             market.updatePrices();
-            cout << "Ceny zostały zaktualizowane!" << endl;
+            cout << "Prices have been updated!" << endl;
             break;
         case 7:
-            cout << "Koniec symulacji." << endl;
+            cout << "End of simulation." << endl;
             break;
         default:
-            cout << "Nieprawidłowa opcja." << endl;
+            cout << "Invalid option." << endl;
         }
     } while (option != 7);
 
