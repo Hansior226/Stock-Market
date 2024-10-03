@@ -13,3 +13,5 @@ My first ever C++ project all made by myself. I ad it not because is super usefu
 Just simpy downolad a code or paste it into compiler, nothing special.
 
 ### Working program
+
+![image](https://github.com/user-attachments/assets/3e8865cd-ebad-41d9-904c-1abd1fcf867a)
